@@ -1,0 +1,6 @@
+<%= content_for :mosaico_before_init do %>
+
+  <%= javascript_include_tag 'mosaico-rails-iframe/iframe.js' %>
+
+<% end %>
+<%= render template: 'rails_mosaico/email_templates/editor' %>
