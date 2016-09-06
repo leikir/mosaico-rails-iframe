@@ -86,4 +86,28 @@
     window.attachEvent('onmessage', rcvmessage);
   }
 
+  // observe
+
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  var templateLoaded = false;
+  var toObserve = document.body;
+
+  // First we check when the template has loaded, then we watch its changes
+  var observer = new MutationObserver(function(mutations, observer) {
+    if (templateLoaded === false && mutations.length > 1) {
+      templateLoaded = true;
+      toObserve = document.getElementById('main-wysiwyg-area');
+      window.top.postMessage(JSON.stringify({
+        type: 'wysiwygLoaded'
+      }), '*');
+    }
+  });
+
+  observer.observe(toObserve, {
+    subtree: true,
+    attributes: false,
+    characterData: true
+  });
+
 })()
