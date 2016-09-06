@@ -36,7 +36,7 @@
 
       case 'init':
         if (data.locale) {
-          strings = $.ajax('rails_mosaico/lang/mosaico-' + data.locale + '.json', {type: 'GET', async: false}).responseText;
+          strings = $.ajax('translations/' + data.locale + '.json', {type: 'GET', async: false}).responseText;
           window.mosaicoOptions.strings = $.parseJSON(strings);
         }
         if (data.metadata && data.content) {
