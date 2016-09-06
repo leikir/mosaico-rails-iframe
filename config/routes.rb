@@ -1,6 +1,6 @@
 MosaicoRailsIframe::Engine.routes.draw do
 
-  mount RailsMosaico::Engine, at: '/'
+  mount MosaicoRails::Engine, at: '/'
 
   get   '/iframe' => 'application#iframe'
 

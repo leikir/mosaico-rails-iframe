@@ -9,7 +9,7 @@ module MosaicoRailsIframe
     end
 
     initializer "mosaico-rails-iframe.rails_mosaico" do |app|
-      RailsMosaico.auto_init = false
+      MosaicoRails.auto_init = false
     end
 
   end

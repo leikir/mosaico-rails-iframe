@@ -1,5 +1,5 @@
 require "mosaico-rails-iframe/engine"
-require "rails_mosaico"
+require "mosaico-rails"
 
 module MosaicoRailsIframe
 end
