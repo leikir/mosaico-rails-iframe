@@ -47,15 +47,7 @@
         }
         Mosaico.init(window.mosaicoOptions, window.mosaicoPlugins);
         break;
-
-      case 'loadContent':
-        window.mosaicoOptions.data = JSON.stringify({
-          metadata: JSON.parse(data.datas.metadata),
-          content: JSON.parse(data.datas.metadata)
-        });
-        Mosaico.init(window.mosaicoOptions, window.mosaicoPlugins);
-        break;
-
+        
       case 'css':
         var elems = data.elems;
         var style = data.style;
@@ -73,7 +65,6 @@
           jsonMetadata: window.viewModel.exportMetadata()
         }), '*');
         break;
-
       default:
         console.info(data.action + ' is not recognized as an action');
 
