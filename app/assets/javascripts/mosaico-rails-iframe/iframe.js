@@ -105,6 +105,7 @@
         window.top.postMessage(JSON.stringify({
           type: 'wysiwygLoaded'
         }), '*');
+        templateLoaded = true;
       }
     }
   });
