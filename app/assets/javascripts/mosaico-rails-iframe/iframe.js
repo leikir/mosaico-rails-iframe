@@ -46,8 +46,9 @@
           });
         }
         Mosaico.init(window.mosaicoOptions, window.mosaicoPlugins);
+        console.log('init finished, sending message');
         break;
-        
+
       case 'css':
         var elems = data.elems;
         var style = data.style;
@@ -87,11 +88,22 @@
   // First we check when the template has loaded, then we watch its changes
   var observer = new MutationObserver(function(mutations, observer) {
     if (templateLoaded === false && mutations.length > 1) {
-      templateLoaded = true;
       toObserve = document.getElementById('main-wysiwyg-area');
-      window.top.postMessage(JSON.stringify({
-        type: 'wysiwygLoaded'
-      }), '*');
+      var replacedhead = document.getElementsByTagName('replacedhead')[0];
+      var cpt = 0;
+      if (replacedhead) {
+        for (var i = 0; i < replacedhead.childNodes.length; i++) {
+          if (replacedhead.childNodes[i].tagName === "STYLE") {
+            cpt++;
+          }
+        }
+      }
+
+      if (cpt >= 1) {
+        window.top.postMessage(JSON.stringify({
+          type: 'wysiwygLoaded'
+        }), '*');
+      }
     }
   });
 
