@@ -33,8 +33,10 @@
     var data = JSON.parse(evt.data);
 
     switch (data.action) {
-
       case 'init':
+        if (data.headers) {
+          $.ajaxSetup({headers: data.headers});
+        }
         if (data.locale) {
           strings = $.ajax('translations/' + data.locale + '.json', {type: 'GET', async: false}).responseText;
           window.mosaicoOptions.strings = $.parseJSON(strings);
