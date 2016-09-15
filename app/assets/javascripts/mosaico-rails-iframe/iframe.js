@@ -80,6 +80,21 @@
     window.attachEvent('onmessage', rcvmessage);
   }
 
+  var mosaicoContentLoaded = function() {
+    document.getElementById('previewFrameToggle').onclick = function() {
+      var frame = $('#frame-container iframe');
+      frame.ready(function() {
+        frame.contents().find('#ko_footerBlock_1').remove();
+      });
+    }
+  };
+
+  if (window.addEventListener) {
+    window.addEventListener('mosaicoContentLoaded', mosaicoContentLoaded, false);
+  } else {
+    window.attachEvent('mosaicoContentLoaded', mosaicoContentLoaded);
+  }
+
   // observe
 
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -106,6 +121,7 @@
           type: 'wysiwygLoaded'
         }), '*');
         templateLoaded = true;
+        window.dispatchEvent(new Event('mosaicoContentLoaded'));
       }
     }
   });
