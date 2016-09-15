@@ -6,6 +6,7 @@
   }
 
   var strings;
+  var removePreviewFooter = false;
 
   // add a plugin to get access to $root
   window.mosaicoPlugins.push(function(viewModel) {
@@ -34,6 +35,9 @@
 
     switch (data.action) {
       case 'init':
+        if (data.removePreviewFooter) {
+          removePreviewFooter = data.removePreviewFooter;
+        }
         if (data.headers) {
           $.ajaxSetup({headers: data.headers});
         }
@@ -84,7 +88,9 @@
     document.getElementById('previewFrameToggle').onclick = function() {
       var frame = $('#frame-container iframe');
       frame.ready(function() {
-        frame.contents().find('#ko_footerBlock_1').remove();
+        if (removePreviewFooter) {
+          frame.contents().find('#ko_footerBlock_1').remove();
+        }
       });
     }
   };
