@@ -5,7 +5,6 @@
     return;
   }
 
-  var strings;
   var removePreviewFooter = false;
 
   // add a plugin to get access to $root
@@ -15,13 +14,17 @@
 
   // add a plugin to handle strings
   window.mosaicoPlugins.push(function(viewModel) {
-    if (strings) {
-      viewModel.ut = function(key, objParam) {
-        var res = strings[objParam]
-        if (typeof res == 'undefined') {
-          res = objParam;
+    if (window.mosaicoOptions.strings) {
+      viewModel.ut = function(category, key) {
+        var categoryStrings = window.mosaicoOptions.strings[category];
+        if (typeof categoryStrings == 'undefined') {
+          return key;
         }
-        return res;
+        var result = categoryStrings[key];
+        if (typeof result == 'undefined') {
+          return key;
+        }
+        return result;
       }
     }
   });
@@ -42,8 +45,8 @@
           $.ajaxSetup({headers: data.headers});
         }
         if (data.locale) {
-          strings = $.ajax('translations/' + data.locale + '.json', {type: 'GET', async: false}).responseText;
-          window.mosaicoOptions.strings = $.parseJSON(strings);
+          var stringsJSON = $.ajax('translations/' + data.locale + '.json', {type: 'GET', async: false}).responseText;
+          window.mosaicoOptions.strings = $.parseJSON(stringsJSON);
         }
         if (data.metadata && data.content) {
           window.mosaicoOptions.data = JSON.stringify({
