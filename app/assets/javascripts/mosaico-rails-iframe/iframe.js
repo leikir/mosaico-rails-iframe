@@ -56,8 +56,22 @@
             content: JSON.parse(data.content)
           });
         }
+        if (data.plugins) {
+
+          for (var i in data.plugins) {
+            (function(c) {
+              window.mosaicoPlugins.push(function(viewModel) {
+                eval(c);
+              });
+
+            })(data.plugins[i]);
+          }
+        }
+        if (data.options) {
+          $.extend(true, window.mosaicoOptions, data.options);
+        }
+
         Mosaico.init(window.mosaicoOptions, window.mosaicoPlugins);
-        console.log('init finished, sending message');
         break;
 
       case 'css':
