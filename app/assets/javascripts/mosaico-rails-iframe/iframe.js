@@ -18,12 +18,16 @@
       viewModel.ut = function(category, key) {
         var categoryStrings = window.mosaicoOptions.strings[category];
         if (typeof categoryStrings == 'undefined') {
-          console.error("no translations found for category", category);
+          if (window.mosaicoOptions.debug) {
+            console.error("no translations found for category", category);
+          }
           return key;
         }
         var result = categoryStrings[key];
         if (typeof result == 'undefined') {
-          console.error("no translations found for key", key, "in category", category);
+          if (window.mosaicoOptions.debug) {
+            console.error("no translations found for key", key, "in category", category);
+          }
           return key;
         }
         return result;
