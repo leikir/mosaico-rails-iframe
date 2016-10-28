@@ -112,7 +112,7 @@
       var frame = $('#frame-container iframe');
       frame.ready(function() {
         if (removePreviewFooter) {
-          frame.contents().find('#ko_footerBlock_1').remove();
+          frame.contents().find('table[id^="ko_footerBlock"]').remove();
         }
       });
     }
