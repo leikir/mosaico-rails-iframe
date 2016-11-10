@@ -87,6 +87,20 @@
         }
         break;
 
+      case 'class':
+        var elems = data.elems;
+        var classes = data.class;
+        var action = data.actions;
+
+        for (var i = 0; i < elems.length; i++) {
+          if (action[i] == 'add') {
+            $(elems[i]).addClass(classes[i]);
+          } else if (action[i] == 'remove') {
+            $(elems[i]).removeClass(classes[i]);
+          }
+        }
+        break;
+
       case 'exportReq':
         var html = window.viewModel.exportHTML();
         html = html.replace(/ (data-mce-style)(="[^"]*")/gm, ' style$2');
