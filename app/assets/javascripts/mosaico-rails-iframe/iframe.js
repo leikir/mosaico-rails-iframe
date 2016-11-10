@@ -88,9 +88,11 @@
         break;
 
       case 'exportReq':
+        var html = window.viewModel.exportHTML();
+        html = html.replace(/ (data-mce-style)(="[^"]*")/gm, ' style$2');
         window.top.postMessage(JSON.stringify({
           type: 'exportHTML',
-          htmlContent: window.viewModel.exportHTML(),
+          htmlContent: html,
           jsonContent: window.viewModel.exportJSON(),
           jsonMetadata: window.viewModel.exportMetadata()
         }), '*');
