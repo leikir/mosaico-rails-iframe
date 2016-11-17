@@ -126,6 +126,7 @@
 
   var mosaicoContentLoaded = function() {
     document.getElementById('previewFrameToggle').onclick = function() {
+      $('.mce-tinymce.mce-tinymce-inline.mce-container.mce-panel.mce-floatpanel').hide();
       var frame = $('#frame-container iframe');
       frame.ready(function() {
         if (removePreviewFooter) {
