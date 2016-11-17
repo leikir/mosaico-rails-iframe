@@ -108,7 +108,8 @@
           type: 'exportHTML',
           htmlContent: html,
           jsonContent: window.viewModel.exportJSON(),
-          jsonMetadata: window.viewModel.exportMetadata()
+          jsonMetadata: window.viewModel.exportMetadata(),
+          timestamp: data.timestamp
         }), '*');
         break;
       default:
