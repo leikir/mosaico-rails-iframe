@@ -119,7 +119,7 @@
           var attr = $(this).attr('src');
           $(this).attr('src', imgBasePath + attr);
         });
-        html = html.replace(/(<body[^>]*>)(.|\n)*(<\/body>)/, '$1' + $body.html() + '$2');
+        html = html.replace(/(<body[^>]*>)(.|\n)*(<\/body>)/, '$1' + $body.html() + '$3');
         window.top.postMessage(JSON.stringify({
           type: 'exportHTML',
           htmlContent: html,
