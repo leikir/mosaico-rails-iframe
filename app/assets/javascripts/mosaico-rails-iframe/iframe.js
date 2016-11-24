@@ -6,6 +6,7 @@
   }
 
   var removePreviewFooter = false;
+  var imgBasePath = '';
 
   // add a plugin to get access to $root
   window.mosaicoPlugins.push(function(viewModel) {
@@ -75,6 +76,13 @@
           $.extend(true, window.mosaicoOptions, data.options);
         }
 
+        if (data.imgBasePath) {
+          imgBasePath = data.imgBasePath;
+          if (imgBasePath[imgBasePath.length - 1] == '/') {
+            imgBasePath = imgBasePath.slice(0, -1);
+          }
+        }
+
         Mosaico.init(window.mosaicoOptions, window.mosaicoPlugins);
         break;
 
@@ -102,8 +110,16 @@
         break;
 
       case 'exportReq':
+
         var html = window.viewModel.exportHTML();
         html = html.replace(/ (data-mce-style)(="[^"]*")/gm, ' style$2');
+        var body = html.replace(/((.|\n)*)<body[^>]*>((.|\n)*)<\/body>((.|\n)*)/, '$3');
+        $body = $('<div/>').html(body);
+        $body.find('img.socialIcon').each(function() {
+          var attr = $(this).attr('src');
+          $(this).attr('src', imgBasePath + attr);
+        });
+        html = html.replace(/(<body[^>]*>)(.|\n)*(<\/body>)/, '$1' + $body.html() + '$2');
         window.top.postMessage(JSON.stringify({
           type: 'exportHTML',
           htmlContent: html,
