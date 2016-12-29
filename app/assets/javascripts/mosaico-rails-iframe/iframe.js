@@ -100,7 +100,10 @@
           }
         }
         break;
-
+      case 'insertHtml':
+        var html = data.html;
+        window.nextInsertHtmlAction(html);
+        break;
       case 'exportReq':
 
         var html = window.viewModel.exportHTML();
