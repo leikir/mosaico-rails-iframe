@@ -42,6 +42,8 @@
 
     var data = JSON.parse(evt.data);
 
+    var promiseId = data.promiseId;
+
     switch (data.action) {
       case 'init':
         if (data.removePreviewFooter) {
@@ -113,7 +115,7 @@
           htmlContent: html,
           jsonContent: window.viewModel.exportJSON(),
           jsonMetadata: window.viewModel.exportMetadata(),
-          timestamp: data.timestamp
+          promiseId: promiseId
         }), '*');
         break;
       default:
