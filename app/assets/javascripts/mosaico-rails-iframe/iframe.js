@@ -102,7 +102,7 @@
         break;
       case 'insertHtml':
         var html = data.html;
-        window.nextInsertHtmlAction(html);
+        tinymce.activeEditor.execCommand('mceInsertContent', false, html);
         break;
       case 'exportReq':
 
