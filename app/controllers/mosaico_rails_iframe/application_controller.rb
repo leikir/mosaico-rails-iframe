@@ -1,4 +1,4 @@
-class MosaicoRailsIframe::ApplicationController < ApplicationController
+class MosaicoRailsIframe::ApplicationController < ActionController::Base
 
   def iframe
     unless MosaicoRailsIframe.front_end_url.nil?
