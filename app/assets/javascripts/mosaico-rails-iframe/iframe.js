@@ -38,7 +38,7 @@
   // receive commands from other (parent) window
   var rcvmessage = function(evt) {
 
-    console.log('rcvmessage', evt);
+    // console.log('rcvmessage', evt);
 
     var data = JSON.parse(evt.data);
 
