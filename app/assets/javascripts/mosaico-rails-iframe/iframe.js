@@ -144,6 +144,7 @@
 
   if (window.addEventListener) {
     window.addEventListener('mosaicoContentLoaded', mosaicoContentLoaded, false);
+    console.log("mosaicoContentLoaded loaded", mosaicoContentLoaded);
   } else {
     window.attachEvent('mosaicoContentLoaded', mosaicoContentLoaded);
   }
@@ -174,10 +175,38 @@
           type: 'wysiwygLoaded'
         }), '*');
         templateLoaded = true;
-        window.dispatchEvent(new Event('mosaicoContentLoaded'));
+        var evt = document.createEvent('Event');
+        console.log("evt", evt);
+        evt.initEvent('mosaicoContentLoaded', true, false);
+        console.log("modified evt", evt);
+        document.dispatchEvent(evt);
+        console.log("evt dispatched");
+        // evt = document;
+        // if (evt.createEvent) {
+        //   event = new Event('mosaicoContentLoaded');
+        //   window.dispatchEvent(event);
+        // } else {
+        //   event = evt.createEventObject();
+        //   window.fireEvent('mosaicoContentLoaded', event);
+        // }   
+        // window.dispatchEvent(new Event('mosaicoContentLoaded'));
       }
     }
   });
+
+  // function (target, type, doc, event) {
+  //   doc = document;
+  //   if (doc.createEvent) {
+  //     event = new Event(type);
+  //     target.dispatchEvent(event);
+  //   } else {
+  //     event = doc.createEventObject();
+  //     target.fireEvent('on' + type, event);
+  //   }
+  // };
+  // var evt = document.createEvent('Event');
+  // evt.initEvent('mosaicoContentLoaded', true, false);
+  // window.dispatchEvent(evt);
 
   observer.observe(toObserve, {
     subtree: true,
