@@ -174,7 +174,15 @@
           type: 'wysiwygLoaded'
         }), '*');
         templateLoaded = true;
-        window.dispatchEvent(new Event('mosaicoContentLoaded'));
+        var evt;
+        if (typeof(Event) !== "undefined") {
+          evt = new Event('mosaicoContentLoaded');
+        }
+        else {
+          evt = document.createEvent('Event');
+          evt.initEvent('mosaicoContentLoaded', true, false);
+        }
+        window.dispatchEvent(evt);
       }
     }
   });
