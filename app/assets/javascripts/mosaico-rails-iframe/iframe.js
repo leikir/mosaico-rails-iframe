@@ -174,35 +174,17 @@
           type: 'wysiwygLoaded'
         }), '*');
         templateLoaded = true;
-        var evt = document.createEvent('Event');
-        evt.initEvent('mosaicoContentLoaded', true, false);
-        window.dispatchEvent(evt);
-        // evt = document;
-        // if (evt.createEvent) {
-        //   event = new Event('mosaicoContentLoaded');
-        //   window.dispatchEvent(event);
-        // } else {
-        //   event = evt.createEventObject();
-        //   window.fireEvent('mosaicoContentLoaded', event);
-        // }
-        // window.dispatchEvent(new Event('mosaicoContentLoaded'));
+        if (document.createEvent) {
+          var evt = document.createEvent('Event');
+          evt.initEvent('mosaicoContentLoaded', true, false);
+          window.dispatchEvent(evt);
+        }
+        else {
+          window.dispatchEvent(new Event('mosaicoContentLoaded'));
+        }
       }
     }
   });
-
-  // function (target, type, doc, event) {
-  //   doc = document;
-  //   if (doc.createEvent) {
-  //     event = new Event(type);
-  //     target.dispatchEvent(event);
-  //   } else {
-  //     event = doc.createEventObject();
-  //     target.fireEvent('on' + type, event);
-  //   }
-  // };
-  // var evt = document.createEvent('Event');
-  // evt.initEvent('mosaicoContentLoaded', true, false);
-  // window.dispatchEvent(evt);
 
   observer.observe(toObserve, {
     subtree: true,
