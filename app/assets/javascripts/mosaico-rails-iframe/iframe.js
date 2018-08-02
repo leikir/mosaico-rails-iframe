@@ -57,10 +57,10 @@
           window.mosaicoOptions.strings = $.parseJSON(stringsJSON);
         }
         if (data.metadata && data.content) {
-          window.mosaicoOptions.data = JSON.stringify({
+          window.mosaicoOptions.data = {
             metadata: JSON.parse(data.metadata),
             content: JSON.parse(data.content)
-          });
+          };
         }
         if (data.plugins) {
 
